@@ -1,0 +1,321 @@
+// GENERATED AUTOMATICALLY FROM 'Assets/Input/PlayerInputActions.inputactions'
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Utilities;
+
+public class @PlayerInputActions : IInputActionCollection, IDisposable
+{
+    public InputActionAsset asset { get; }
+    public @PlayerInputActions()
+    {
+        asset = InputActionAsset.FromJson(@"{
+    ""name"": ""PlayerInputActions"",
+    ""maps"": [
+        {
+            ""name"": ""PlayerActionMap"",
+            ""id"": ""e957ddc2-7049-40eb-9cd6-c3b22fe477aa"",
+            ""actions"": [
+                {
+                    ""name"": ""Movement"",
+                    ""type"": ""Value"",
+                    ""id"": ""0b05fb87-cd75-49c3-a297-717c36773fcd"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Jump"",
+                    ""type"": ""Button"",
+                    ""id"": ""8c3c6a4a-6821-4dd0-8f42-785a571518f3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Run"",
+                    ""type"": ""Button"",
+                    ""id"": ""7a7cfe0c-2909-456f-b9ed-2c407b7b54df"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press(behavior=2)""
+                },
+                {
+                    ""name"": ""Look"",
+                    ""type"": ""Value"",
+                    ""id"": ""e1db03d2-eed5-47ce-ad82-e03e95e8fc82"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": ""NormalizeVector2"",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Fire"",
+                    ""type"": ""Button"",
+                    ""id"": ""180083d3-e780-4be4-a712-b31c7ef584d2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press(behavior=2)""
+                },
+                {
+                    ""name"": ""Reload"",
+                    ""type"": ""Button"",
+                    ""id"": ""890e7436-d551-4a87-8527-ac7b112106db"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press""
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": ""Direction"",
+                    ""id"": ""c784f696-94b8-4982-823c-8a704ea235a3"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""1dc696ce-5a3b-424c-aaa3-1f07004f76c8"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""52aca587-2229-4af5-bc52-7c5c35638a2d"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""406241f6-54d4-462d-b7f9-bca67c350329"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""2def3a66-a2c4-4e4f-93f8-d93ba1049387"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d45b5f1d-4239-45ae-9490-b4edf6f0691a"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3895b89a-d00f-4cb7-b725-10e3b8263911"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Run"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0735793e-3462-4720-b952-6d098dff97e2"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""551ea24c-5850-4d39-9c17-d748c8d380b8"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Fire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6e23a571-c6ee-4365-b8bd-18b63df10cc4"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Reload"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        }
+    ],
+    ""controlSchemes"": []
+}");
+        // PlayerActionMap
+        m_PlayerActionMap = asset.FindActionMap("PlayerActionMap", throwIfNotFound: true);
+        m_PlayerActionMap_Movement = m_PlayerActionMap.FindAction("Movement", throwIfNotFound: true);
+        m_PlayerActionMap_Jump = m_PlayerActionMap.FindAction("Jump", throwIfNotFound: true);
+        m_PlayerActionMap_Run = m_PlayerActionMap.FindAction("Run", throwIfNotFound: true);
+        m_PlayerActionMap_Look = m_PlayerActionMap.FindAction("Look", throwIfNotFound: true);
+        m_PlayerActionMap_Fire = m_PlayerActionMap.FindAction("Fire", throwIfNotFound: true);
+        m_PlayerActionMap_Reload = m_PlayerActionMap.FindAction("Reload", throwIfNotFound: true);
+    }
+
+    public void Dispose()
+    {
+        UnityEngine.Object.Destroy(asset);
+    }
+
+    public InputBinding? bindingMask
+    {
+        get => asset.bindingMask;
+        set => asset.bindingMask = value;
+    }
+
+    public ReadOnlyArray<InputDevice>? devices
+    {
+        get => asset.devices;
+        set => asset.devices = value;
+    }
+
+    public ReadOnlyArray<InputControlScheme> controlSchemes => asset.controlSchemes;
+
+    public bool Contains(InputAction action)
+    {
+        return asset.Contains(action);
+    }
+
+    public IEnumerator<InputAction> GetEnumerator()
+    {
+        return asset.GetEnumerator();
+    }
+
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        return GetEnumerator();
+    }
+
+    public void Enable()
+    {
+        asset.Enable();
+    }
+
+    public void Disable()
+    {
+        asset.Disable();
+    }
+
+    // PlayerActionMap
+    private readonly InputActionMap m_PlayerActionMap;
+    private IPlayerActionMapActions m_PlayerActionMapActionsCallbackInterface;
+    private readonly InputAction m_PlayerActionMap_Movement;
+    private readonly InputAction m_PlayerActionMap_Jump;
+    private readonly InputAction m_PlayerActionMap_Run;
+    private readonly InputAction m_PlayerActionMap_Look;
+    private readonly InputAction m_PlayerActionMap_Fire;
+    private readonly InputAction m_PlayerActionMap_Reload;
+    public struct PlayerActionMapActions
+    {
+        private @PlayerInputActions m_Wrapper;
+        public PlayerActionMapActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Movement => m_Wrapper.m_PlayerActionMap_Movement;
+        public InputAction @Jump => m_Wrapper.m_PlayerActionMap_Jump;
+        public InputAction @Run => m_Wrapper.m_PlayerActionMap_Run;
+        public InputAction @Look => m_Wrapper.m_PlayerActionMap_Look;
+        public InputAction @Fire => m_Wrapper.m_PlayerActionMap_Fire;
+        public InputAction @Reload => m_Wrapper.m_PlayerActionMap_Reload;
+        public InputActionMap Get() { return m_Wrapper.m_PlayerActionMap; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(PlayerActionMapActions set) { return set.Get(); }
+        public void SetCallbacks(IPlayerActionMapActions instance)
+        {
+            if (m_Wrapper.m_PlayerActionMapActionsCallbackInterface != null)
+            {
+                @Movement.started -= m_Wrapper.m_PlayerActionMapActionsCallbackInterface.OnMovement;
+                @Movement.performed -= m_Wrapper.m_PlayerActionMapActionsCallbackInterface.OnMovement;
+                @Movement.canceled -= m_Wrapper.m_PlayerActionMapActionsCallbackInterface.OnMovement;
+                @Jump.started -= m_Wrapper.m_PlayerActionMapActionsCallbackInterface.OnJump;
+                @Jump.performed -= m_Wrapper.m_PlayerActionMapActionsCallbackInterface.OnJump;
+                @Jump.canceled -= m_Wrapper.m_PlayerActionMapActionsCallbackInterface.OnJump;
+                @Run.started -= m_Wrapper.m_PlayerActionMapActionsCallbackInterface.OnRun;
+                @Run.performed -= m_Wrapper.m_PlayerActionMapActionsCallbackInterface.OnRun;
+                @Run.canceled -= m_Wrapper.m_PlayerActionMapActionsCallbackInterface.OnRun;
+                @Look.started -= m_Wrapper.m_PlayerActionMapActionsCallbackInterface.OnLook;
+                @Look.performed -= m_Wrapper.m_PlayerActionMapActionsCallbackInterface.OnLook;
+                @Look.canceled -= m_Wrapper.m_PlayerActionMapActionsCallbackInterface.OnLook;
+                @Fire.started -= m_Wrapper.m_PlayerActionMapActionsCallbackInterface.OnFire;
+                @Fire.performed -= m_Wrapper.m_PlayerActionMapActionsCallbackInterface.OnFire;
+                @Fire.canceled -= m_Wrapper.m_PlayerActionMapActionsCallbackInterface.OnFire;
+                @Reload.started -= m_Wrapper.m_PlayerActionMapActionsCallbackInterface.OnReload;
+                @Reload.performed -= m_Wrapper.m_PlayerActionMapActionsCallbackInterface.OnReload;
+                @Reload.canceled -= m_Wrapper.m_PlayerActionMapActionsCallbackInterface.OnReload;
+            }
+            m_Wrapper.m_PlayerActionMapActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Movement.started += instance.OnMovement;
+                @Movement.performed += instance.OnMovement;
+                @Movement.canceled += instance.OnMovement;
+                @Jump.started += instance.OnJump;
+                @Jump.performed += instance.OnJump;
+                @Jump.canceled += instance.OnJump;
+                @Run.started += instance.OnRun;
+                @Run.performed += instance.OnRun;
+                @Run.canceled += instance.OnRun;
+                @Look.started += instance.OnLook;
+                @Look.performed += instance.OnLook;
+                @Look.canceled += instance.OnLook;
+                @Fire.started += instance.OnFire;
+                @Fire.performed += instance.OnFire;
+                @Fire.canceled += instance.OnFire;
+                @Reload.started += instance.OnReload;
+                @Reload.performed += instance.OnReload;
+                @Reload.canceled += instance.OnReload;
+            }
+        }
+    }
+    public PlayerActionMapActions @PlayerActionMap => new PlayerActionMapActions(this);
+    public interface IPlayerActionMapActions
+    {
+        void OnMovement(InputAction.CallbackContext context);
+        void OnJump(InputAction.CallbackContext context);
+        void OnRun(InputAction.CallbackContext context);
+        void OnLook(InputAction.CallbackContext context);
+        void OnFire(InputAction.CallbackContext context);
+        void OnReload(InputAction.CallbackContext context);
+    }
+}
