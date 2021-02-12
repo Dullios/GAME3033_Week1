@@ -2,17 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerEvents : MonoBehaviour
+public class PlayerEvents
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public delegate void OnWeaponEquippedEvent(WeaponComponent weaponComponent);
 
-    // Update is called once per frame
-    void Update()
+    public static event OnWeaponEquippedEvent OnWeaponEquipped;
+
+    public static void Invoke_OnWeaponEquippedEvent(WeaponComponent weaponComponent)
     {
-        
+        OnWeaponEquipped?.Invoke(weaponComponent);
     }
 }

@@ -54,6 +54,9 @@ public class WeaponHolder : MonoBehaviour
             if(equippedWeapon)
             {
                 equippedWeapon.Initialize(this, playerCrosshair);
+
+                PlayerEvents.Invoke_OnWeaponEquippedEvent(equippedWeapon);
+
                 playerAnimator.SetInteger(WeaponTypeHash, (int)equippedWeapon.weaponStats.weaponType);
                 gripIKLocation = equippedWeapon.GripLocation;
             }

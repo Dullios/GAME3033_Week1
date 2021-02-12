@@ -11,6 +11,11 @@ public class AK47Component : WeaponComponent
         if (weaponStats.bulletsInClip > 0 && !reloading && !weaponHolder.controller.isRunning)
         {
             base.FireWeapon();
+
+            if(!firingEffect)
+            {
+                firingEffect = Instantiate(firingAnimation, particleSpawnLocation).GetComponent<ParticleSystem>();
+            }
             
             Ray screenRay = mainCamera.ScreenPointToRay(new Vector3(crosshair.CurrentAimPosition.x, crosshair.CurrentAimPosition.y, 0));
 

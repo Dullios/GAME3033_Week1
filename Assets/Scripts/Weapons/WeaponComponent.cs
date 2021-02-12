@@ -31,13 +31,18 @@ public class WeaponComponent : MonoBehaviour
     public Transform GripLocation => gripIKLocation;
     [SerializeField]
     private Transform gripIKLocation;
+    public Transform particleSpawnLocation;
 
     public WeaponStats weaponStats;
+
+    [SerializeField]
+    protected GameObject firingAnimation;
 
     // Initialize
     protected WeaponHolder weaponHolder;
     protected CrosshairScript crosshair;
     protected Camera mainCamera;
+    protected ParticleSystem firingEffect;
 
     public bool firing { get; private set; }
     public bool reloading { get; private set; }
@@ -68,6 +73,9 @@ public class WeaponComponent : MonoBehaviour
 
     public virtual void StopFiringWeapon()
     {
+        if (firingEffect)
+            Destroy(firingEffect.gameObject);
+
         firing = false;
         CancelInvoke(nameof(FireWeapon));
     }
@@ -91,6 +99,9 @@ public class WeaponComponent : MonoBehaviour
 
     protected virtual void ReloadWeapon()
     {
+        if (firingEffect)
+            Destroy(firingEffect.gameObject);
+
         int bulletsToReload = weaponStats.clipSize - weaponStats.bulletsAvailable;
 
         if(bulletsToReload < 0)
