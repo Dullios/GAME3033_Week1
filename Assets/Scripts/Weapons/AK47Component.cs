@@ -24,6 +24,8 @@ public class AK47Component : WeaponComponent
                 hitLocation = hit.point;
                 Vector3 hitDirection = hit.point - mainCamera.transform.position;
 
+                TakeDamage(hit);
+
                 Debug.DrawRay(mainCamera.transform.position, hitDirection.normalized * weaponStats.fireDistance, Color.red);
             }
         }
@@ -34,6 +36,13 @@ public class AK47Component : WeaponComponent
 
             weaponHolder.StartReloading();
         }
+    }
+
+    private void TakeDamage(RaycastHit hitInfo)
+    {
+        IDamageable damageable = hitInfo.collider.GetComponent<IDamageable>();
+
+        damageable?.TakeDamage(weaponStats.damage);
     }
 
     private void OnDrawGizmos()

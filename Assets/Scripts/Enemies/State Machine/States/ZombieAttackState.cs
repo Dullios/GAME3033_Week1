@@ -10,10 +10,14 @@ public class ZombieAttackState : ZombieStates
     private GameObject followTarget;
     private float attackRange = 2.0f;
 
+    private IDamageable damageableObject;
+
     public ZombieAttackState(GameObject _followTarget, ZombieComponent zombie, StateMachine stateMachine) : base(zombie, stateMachine)
     {
         followTarget = _followTarget;
         updateInterval = 2.0f;
+
+        damageableObject = followTarget.GetComponent<IDamageable>();
     }
 
     // Start is called before the first frame update
@@ -29,7 +33,7 @@ public class ZombieAttackState : ZombieStates
     {
         base.IntervalUpdate();
 
-        //TODO: add damage to object
+        damageableObject?.TakeDamage(ownerZombie.ZombieDamage);
     }
 
     // Update is called once per frame
@@ -43,8 +47,6 @@ public class ZombieAttackState : ZombieStates
         {
             stateMachine.ChangeState(ZombieStateType.Follow);
         }
-
-        //TODO: zombie health < 0 die
     }
 
     public override void Exit()

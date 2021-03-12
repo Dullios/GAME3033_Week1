@@ -15,6 +15,10 @@ public class ZombieComponent : MonoBehaviour
 
     public GameObject followTarget;
 
+    public float ZombieDamage => damage;
+    [SerializeField]
+    private float damage;
+
     [SerializeField]
     private bool _Debug;
 
