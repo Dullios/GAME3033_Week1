@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
 
     public bool CursorActive { get; private set; } = true;
 
+    public string GameSaveName { get; private set; } = "";
+
     private void Awake()
     {
         if(Instance != null && Instance != this)
@@ -45,5 +47,13 @@ public class GameManager : MonoBehaviour
     private void OnDisable()
     {
         AppEvents.MouseCursorEnabled -= EnableCursor;
+    }
+
+    public void SetActiveSave(string saveName)
+    {
+        if (string.IsNullOrEmpty(saveName))
+            return;
+
+        GameSaveName = saveName;
     }
 }
