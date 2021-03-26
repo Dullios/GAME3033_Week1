@@ -18,6 +18,8 @@ public class MenuController : MonoBehaviour
     {
         DisableAllMenus();
         EnableMenu(startingMenu);
+
+        AppEvents.Invoke_OnMouseCursorEnable(true);
     }
 
     public void AddMenu(string menuName, MenuWidget widget)

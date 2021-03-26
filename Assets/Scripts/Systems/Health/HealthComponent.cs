@@ -12,10 +12,14 @@ public class HealthComponent : MonoBehaviour, IDamageable
     [SerializeField]
     private float maxHealth;
 
+    [SerializeField]
+    private ConsumableScriptable PotionItem;
+
     // Start is called before the first frame update
     protected virtual void Start()
     {
         currentHealth = maxHealth;
+        currentHealth = 50;
     }
 
     public virtual void TakeDamage(float damage)
@@ -23,6 +27,12 @@ public class HealthComponent : MonoBehaviour, IDamageable
         currentHealth -= damage;
         if (currentHealth <= 0)
             Destroy();
+    }
+
+    public void HealPlayer(int effect)
+    {
+        if (currentHealth < MaxHealth)
+            currentHealth = Mathf.Clamp(currentHealth + effect, 0, maxHealth);
     }
 
     public virtual void Destroy()

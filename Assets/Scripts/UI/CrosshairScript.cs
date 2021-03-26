@@ -28,6 +28,8 @@ public class CrosshairScript : InputMonoBehaviour
 
     public bool inverted = false;
 
+    private bool gamePaused;
+
     // Start is called before the first frame update
     void Start()
     {

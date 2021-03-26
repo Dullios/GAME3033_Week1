@@ -52,10 +52,15 @@ public class WeaponComponent : MonoBehaviour
         mainCamera = Camera.main;
     }
 
-    public void Initialize(WeaponHolder _weaponHolder, CrosshairScript _crosshair)
+    public void Initialize(WeaponHolder _weaponHolder, WeaponScriptable weaponScript)
     {
         weaponHolder = _weaponHolder;
-        crosshair = _crosshair;
+        crosshair = weaponHolder.playerCrosshair;
+
+        if(weaponScript)
+        {
+            weaponStats = weaponScript.weaponStats;
+        }
     }
 
     public virtual void StartFiringWeapon()

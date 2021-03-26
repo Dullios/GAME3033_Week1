@@ -65,6 +65,14 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": ""Press""
+                },
+                {
+                    ""name"": ""PauseGame"",
+                    ""type"": ""Button"",
+                    ""id"": ""cab38bfa-d193-4251-a504-0a404343cf93"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -177,6 +185,44 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""action"": ""Reload"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fca111a8-fa0d-4bc4-91d7-3f67000235a6"",
+                    ""path"": ""<Keyboard>/p"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PauseGame"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""PauseActionMap"",
+            ""id"": ""3e086b8c-0fda-408b-9013-cadaaede3eb5"",
+            ""actions"": [
+                {
+                    ""name"": ""UnpauseGame"",
+                    ""type"": ""Button"",
+                    ""id"": ""b3c6378d-b155-415a-9b19-dee4e7289cd5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""a9984c02-fdad-4154-9018-0efefe47c993"",
+                    ""path"": ""<Keyboard>/p"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""UnpauseGame"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -191,6 +237,10 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         m_PlayerActionMap_Look = m_PlayerActionMap.FindAction("Look", throwIfNotFound: true);
         m_PlayerActionMap_Fire = m_PlayerActionMap.FindAction("Fire", throwIfNotFound: true);
         m_PlayerActionMap_Reload = m_PlayerActionMap.FindAction("Reload", throwIfNotFound: true);
+        m_PlayerActionMap_PauseGame = m_PlayerActionMap.FindAction("PauseGame", throwIfNotFound: true);
+        // PauseActionMap
+        m_PauseActionMap = asset.FindActionMap("PauseActionMap", throwIfNotFound: true);
+        m_PauseActionMap_UnpauseGame = m_PauseActionMap.FindAction("UnpauseGame", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -246,6 +296,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
     private readonly InputAction m_PlayerActionMap_Look;
     private readonly InputAction m_PlayerActionMap_Fire;
     private readonly InputAction m_PlayerActionMap_Reload;
+    private readonly InputAction m_PlayerActionMap_PauseGame;
     public struct PlayerActionMapActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -256,6 +307,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         public InputAction @Look => m_Wrapper.m_PlayerActionMap_Look;
         public InputAction @Fire => m_Wrapper.m_PlayerActionMap_Fire;
         public InputAction @Reload => m_Wrapper.m_PlayerActionMap_Reload;
+        public InputAction @PauseGame => m_Wrapper.m_PlayerActionMap_PauseGame;
         public InputActionMap Get() { return m_Wrapper.m_PlayerActionMap; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -283,6 +335,9 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 @Reload.started -= m_Wrapper.m_PlayerActionMapActionsCallbackInterface.OnReload;
                 @Reload.performed -= m_Wrapper.m_PlayerActionMapActionsCallbackInterface.OnReload;
                 @Reload.canceled -= m_Wrapper.m_PlayerActionMapActionsCallbackInterface.OnReload;
+                @PauseGame.started -= m_Wrapper.m_PlayerActionMapActionsCallbackInterface.OnPauseGame;
+                @PauseGame.performed -= m_Wrapper.m_PlayerActionMapActionsCallbackInterface.OnPauseGame;
+                @PauseGame.canceled -= m_Wrapper.m_PlayerActionMapActionsCallbackInterface.OnPauseGame;
             }
             m_Wrapper.m_PlayerActionMapActionsCallbackInterface = instance;
             if (instance != null)
@@ -305,10 +360,46 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 @Reload.started += instance.OnReload;
                 @Reload.performed += instance.OnReload;
                 @Reload.canceled += instance.OnReload;
+                @PauseGame.started += instance.OnPauseGame;
+                @PauseGame.performed += instance.OnPauseGame;
+                @PauseGame.canceled += instance.OnPauseGame;
             }
         }
     }
     public PlayerActionMapActions @PlayerActionMap => new PlayerActionMapActions(this);
+
+    // PauseActionMap
+    private readonly InputActionMap m_PauseActionMap;
+    private IPauseActionMapActions m_PauseActionMapActionsCallbackInterface;
+    private readonly InputAction m_PauseActionMap_UnpauseGame;
+    public struct PauseActionMapActions
+    {
+        private @PlayerInputActions m_Wrapper;
+        public PauseActionMapActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @UnpauseGame => m_Wrapper.m_PauseActionMap_UnpauseGame;
+        public InputActionMap Get() { return m_Wrapper.m_PauseActionMap; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(PauseActionMapActions set) { return set.Get(); }
+        public void SetCallbacks(IPauseActionMapActions instance)
+        {
+            if (m_Wrapper.m_PauseActionMapActionsCallbackInterface != null)
+            {
+                @UnpauseGame.started -= m_Wrapper.m_PauseActionMapActionsCallbackInterface.OnUnpauseGame;
+                @UnpauseGame.performed -= m_Wrapper.m_PauseActionMapActionsCallbackInterface.OnUnpauseGame;
+                @UnpauseGame.canceled -= m_Wrapper.m_PauseActionMapActionsCallbackInterface.OnUnpauseGame;
+            }
+            m_Wrapper.m_PauseActionMapActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @UnpauseGame.started += instance.OnUnpauseGame;
+                @UnpauseGame.performed += instance.OnUnpauseGame;
+                @UnpauseGame.canceled += instance.OnUnpauseGame;
+            }
+        }
+    }
+    public PauseActionMapActions @PauseActionMap => new PauseActionMapActions(this);
     public interface IPlayerActionMapActions
     {
         void OnMovement(InputAction.CallbackContext context);
@@ -317,5 +408,10 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         void OnLook(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
         void OnReload(InputAction.CallbackContext context);
+        void OnPauseGame(InputAction.CallbackContext context);
+    }
+    public interface IPauseActionMapActions
+    {
+        void OnUnpauseGame(InputAction.CallbackContext context);
     }
 }
