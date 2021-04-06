@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour, IPausable
     public bool isReloading;
     public bool isJumping;
     public bool isRunning;
+    public bool inInventory;
 
     [Header("Crosshair")]
     [SerializeField]
@@ -23,6 +24,9 @@ public class PlayerController : MonoBehaviour, IPausable
     public WeaponHolder WeaponHolder => weaponHolder;
     private WeaponHolder weaponHolder;
 
+    public InventoryComponent Inventory => inventory;
+    private InventoryComponent inventory;
+
     private GameUIController UIController;
     private PlayerInput playerInput;
 
@@ -32,6 +36,8 @@ public class PlayerController : MonoBehaviour, IPausable
             healthComponent = GetComponent<HealthComponent>();
         if (weaponHolder == null)
             weaponHolder = GetComponent<WeaponHolder>();
+        if (inventory == null)
+            inventory = GetComponent<InventoryComponent>();
 
         UIController = FindObjectOfType<GameUIController>();
         playerInput = GetComponent<PlayerInput>();
@@ -47,6 +53,34 @@ public class PlayerController : MonoBehaviour, IPausable
     {
         Debug.Log("Unpause Game");
         PauseManager.instance.UnpauseGame();
+    }
+
+    public void OnInventory(InputValue value)
+    {
+        if(inInventory)
+        {
+            inInventory = false;
+            OpenInventory(false);
+        }
+        else
+        {
+            inInventory = true;
+            OpenInventory(true);
+        }
+    }
+
+    private void OpenInventory(bool open)
+    {
+        if(open)
+        {
+            PauseManager.instance.PauseGame();
+            UIController.EnableInventoryMenu();
+        }
+        else
+        {
+            PauseManager.instance.UnpauseGame();
+            UIController.EnableGameMenu();
+        }
     }
 
     public void PauseMenu()

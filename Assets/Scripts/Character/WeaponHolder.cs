@@ -47,7 +47,8 @@ public class WeaponHolder : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        EquipWeapon(weaponToSpawn);
+        if(weaponToSpawn)
+            EquipWeapon(weaponToSpawn);
     }
 
     private void OnAnimatorIK(int layerIndex)

@@ -19,6 +19,15 @@ public abstract class ItemScriptable : ScriptableObject
     public bool stackable;
     public int maxStack;
 
+    public delegate void AmountChange();
+    public event AmountChange OnAmountChange;
+
+    public delegate void ItemDestroyed();
+    public event ItemDestroyed OnItemDestroyed;
+
+    public delegate void ItemDropped();
+    public event ItemDropped OnItemDropped;
+
     public int Amount => m_Amount;
     private int m_Amount = 1;
 
@@ -33,21 +42,24 @@ public abstract class ItemScriptable : ScriptableObject
 
     public virtual void DeleteItem(PlayerController controller)
     {
-
+        OnItemDestroyed?.Invoke();
+        controller.Inventory.DeleteItem(this);
     }
 
     public virtual void DropItem(PlayerController controller)
     {
-
+        OnItemDropped?.Invoke();
     }
 
     public void ChangeAmount(int amount)
     {
         m_Amount += amount;
+        OnAmountChange?.Invoke();
     }
 
     public void SetAmount(int amount)
     {
         m_Amount = amount;
+        OnAmountChange?.Invoke();
     }
 }

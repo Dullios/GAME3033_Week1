@@ -47,7 +47,9 @@ public class ItemPickupComponent : MonoBehaviour
         {
             Debug.Log($"{pickUpItem.name} - Picked Up");
 
-            itemInstance.UseItem(other.GetComponent<PlayerController>());
+            InventoryComponent playerInventory = other.GetComponent<InventoryComponent>();
+            if(playerInventory)
+                playerInventory.AddItem(itemInstance, amount);
 
             Destroy(gameObject);
         }
