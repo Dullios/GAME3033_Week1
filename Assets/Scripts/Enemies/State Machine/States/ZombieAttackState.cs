@@ -12,7 +12,7 @@ public class ZombieAttackState : ZombieStates
 
     private IDamageable damageableObject;
 
-    public ZombieAttackState(GameObject _followTarget, ZombieComponent zombie, StateMachine stateMachine) : base(zombie, stateMachine)
+    public ZombieAttackState(GameObject _followTarget, ZombieComponent zombie, ZombieStateMachine stateMachine) : base(zombie, stateMachine)
     {
         followTarget = _followTarget;
         updateInterval = 2.0f;

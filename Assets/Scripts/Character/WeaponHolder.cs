@@ -30,7 +30,8 @@ public class WeaponHolder : MonoBehaviour
 
     // Ref
     private Camera viewCamera;
-    private WeaponComponent equippedWeapon;
+    public WeaponComponent equippedWeapon => weaponComponent;
+    private WeaponComponent weaponComponent;
 
     private void Awake()
     {
@@ -155,7 +156,7 @@ public class WeaponHolder : MonoBehaviour
         GameObject spawnedWeapon = Instantiate(weaponScript.itemPrefab, weaponSocketLocation.position, weaponSocketLocation.rotation, weaponSocketLocation);
         if (spawnedWeapon)
         {
-            equippedWeapon = spawnedWeapon.GetComponent<WeaponComponent>();
+            weaponComponent = spawnedWeapon.GetComponent<WeaponComponent>();
             if (equippedWeapon)
             {
                 equippedWeapon.Initialize(this, weaponScript);
@@ -171,6 +172,6 @@ public class WeaponHolder : MonoBehaviour
     public void UnequipWeapon()
     {
         Destroy(equippedWeapon.gameObject);
-        equippedWeapon = null;
+        weaponComponent = null;
     }
 }

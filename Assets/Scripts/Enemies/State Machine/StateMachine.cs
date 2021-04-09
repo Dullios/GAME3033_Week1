@@ -1,31 +1,28 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StateMachine : MonoBehaviour
+public class StateMachine<T> : MonoBehaviour where T : Enum
 {
-    public State currentState { get; private set; }
-    protected Dictionary<ZombieStateType, State> States;
+    public State<T> currentState { get; private set; }
+    protected Dictionary<T, State<T>> States;
     private bool Running;
 
     private void Awake()
     {
-        States = new Dictionary<ZombieStateType, State>();
+        States = new Dictionary<T, State<T>>();
     }
 
-    public void Initialize(ZombieStateType startingState)
+    public void Initialize(T startingState)
     {
         if (States.ContainsKey(startingState))
         {
             ChangeState(startingState);
         }
-        else if (States.ContainsKey(ZombieStateType.Idle))
-        {
-            ChangeState(ZombieStateType.Idle);
-        }
     }
 
-    public void AddState(ZombieStateType stateName, State state)
+    public void AddState(T stateName, State<T> state)
     {
         if (States.ContainsKey(stateName))
             return;
@@ -33,7 +30,7 @@ public class StateMachine : MonoBehaviour
         States.Add(stateName, state);
     }
 
-    public void RemoveState(ZombieStateType stateName)
+    public void RemoveState(T stateName)
     {
         if (!States.ContainsKey(stateName))
             return;
@@ -41,7 +38,7 @@ public class StateMachine : MonoBehaviour
         States.Remove(stateName);
     }
 
-    public void ChangeState(ZombieStateType nextState)
+    public void ChangeState(T nextState)
     {
         if(Running)
         {

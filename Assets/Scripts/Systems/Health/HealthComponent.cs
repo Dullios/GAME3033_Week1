@@ -35,6 +35,11 @@ public class HealthComponent : MonoBehaviour, IDamageable
             currentHealth = Mathf.Clamp(currentHealth + effect, 0, maxHealth);
     }
 
+    public void SetCurrentHealth(float health)
+    {
+        currentHealth = health;
+    }
+
     public virtual void Destroy()
     {
         Destroy(gameObject);

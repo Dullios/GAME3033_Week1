@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class ZombieHealth : HealthComponent
 {
-    private StateMachine zombieStateMachine;
+    private ZombieStateMachine zombieStateMachine;
 
     private void Awake()
     {
-        zombieStateMachine = GetComponent<StateMachine>();
+        zombieStateMachine = GetComponent<ZombieStateMachine>();
     }
 
     public override void Destroy()

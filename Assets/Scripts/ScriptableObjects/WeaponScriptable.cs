@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,5 +20,17 @@ public class WeaponScriptable : EquipScriptable
         }
 
         base.UseItem(controller);
+    }
+}
+
+[Serializable]
+public class WeaponSaveData : SaveDataBase
+{
+    public WeaponStats weaponStats;
+
+    public WeaponSaveData(WeaponStats _weaponStats)
+    {
+        Name = _weaponStats.weaponName;
+        weaponStats = _weaponStats;
     }
 }

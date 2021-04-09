@@ -1,13 +1,14 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class State
+public class State<T> where T : Enum
 {
-    protected StateMachine stateMachine;
+    protected StateMachine<T> stateMachine;
     public float updateInterval { get; protected set; } = 1.0f;
 
-    protected State(StateMachine _stateMachine)
+    protected State(StateMachine<T> _stateMachine)
     {
         stateMachine = _stateMachine;
     }
@@ -38,11 +39,11 @@ public class State
     }
 }
 
-public class ZombieStates : State
+public class ZombieStates : State<ZombieStateType>
 {
     protected ZombieComponent ownerZombie;
 
-    public ZombieStates(ZombieComponent zombie, StateMachine stateMachine) : base(stateMachine)
+    public ZombieStates(ZombieComponent zombie, ZombieStateMachine stateMachine) : base(stateMachine)
     {
         ownerZombie = zombie;
     }

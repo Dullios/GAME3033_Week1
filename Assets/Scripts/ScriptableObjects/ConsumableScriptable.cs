@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,5 +19,17 @@ public class ConsumableScriptable : ItemScriptable
 
         if (Amount <= 0)
             DeleteItem(controller);
+    }
+}
+
+[Serializable]
+public class ItemSaveData : SaveDataBase
+{
+    public int amount;
+
+    public ItemSaveData(ItemScriptable item)
+    {
+        Name = item.name;
+        amount = item.Amount;
     }
 }
