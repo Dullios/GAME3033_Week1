@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class StateMachine<T> : MonoBehaviour where T : Enum
 {
+    public T ActiveEnumState { get; private set; }
     public State<T> currentState { get; private set; }
     protected Dictionary<T, State<T>> States;
     private bool Running;
@@ -47,7 +48,8 @@ public class StateMachine<T> : MonoBehaviour where T : Enum
 
         if (!States.ContainsKey(nextState))
             return;
-
+        
+        ActiveEnumState = nextState;
         currentState = States[nextState];
         currentState.Start();
 

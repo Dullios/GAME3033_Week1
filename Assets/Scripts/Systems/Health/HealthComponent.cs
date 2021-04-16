@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class HealthComponent : MonoBehaviour, IDamageable
 {
+    public delegate void OnDeathEvent();
+
+    public event OnDeathEvent OnDeath;
+
     public float Health => currentHealth;
     public float MaxHealth => maxHealth;
 
@@ -42,7 +46,7 @@ public class HealthComponent : MonoBehaviour, IDamageable
 
     public virtual void Destroy()
     {
-        Destroy(gameObject);
+        OnDeath?.Invoke();
     }
 
 }

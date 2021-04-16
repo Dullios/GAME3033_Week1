@@ -36,12 +36,22 @@ public class SaveSystem : MonoBehaviour
 
     public void SaveGame()
     {
-        //gameSaveData ??= new GameSaveData();
+        gameSaveData ??= new GameSaveData();
 
         List<ISaveable> saveableObjects = FindObjectsOfType<MonoBehaviour>().OfType<ISaveable>().ToList();
 
         ISaveable playerSaveData = saveableObjects.First(monoObject => monoObject is PlayerController);
         gameSaveData.playerSaveData = playerSaveData?.SaveData() as PlayerSaveData;
+
+        SpawnerSaveDataList spawnerList = new SpawnerSaveDataList();
+        var spawnerDataList = saveableObjects.OfType<ZombieSpawner>();
+        foreach(var spawner in spawnerDataList)
+        {
+            ISaveable saveObject = spawner.GetComponent<ISaveable>();
+            spawnerList.spawnerData.Add(saveObject?.SaveData() as SpawnerSaveData);
+        }
+
+        gameSaveData.spawnerSaveDatList = spawnerList;
 
         string saveDataString = JsonUtility.ToJson(gameSaveData);
 
@@ -52,10 +62,16 @@ public class SaveSystem : MonoBehaviour
 
     public void LoadGame()
     {
-        List<ISaveable> saveableObjects = FindObjectsOfType<MonoBehaviour>().OfType<ISaveable>().ToList();
+        var saveableObjects = FindObjectsOfType<MonoBehaviour>().Where(monoObject => monoObject is ISaveable).ToList();
 
-        ISaveable playerSaveData = saveableObjects.First(monoObject => monoObject is PlayerController);
+        ISaveable playerSaveData = saveableObjects.First(monoObject => monoObject is PlayerController) as ISaveable;
         playerSaveData?.LoadData(gameSaveData.playerSaveData);
+
+        foreach(SpawnerSaveData spawnerData in gameSaveData.spawnerSaveDatList.spawnerData)
+        {
+            ISaveable saveObject = saveableObjects.Find(saveableObject => spawnerData.Name == saveableObject.name) as ISaveable;
+            saveObject?.LoadData(spawnerData);
+        }
     }
 
     public void SaveToFileList()
@@ -84,9 +100,16 @@ public class SaveSystem : MonoBehaviour
 public class GameSaveData
 {
     public PlayerSaveData playerSaveData;
-    
+    public SpawnerSaveDataList spawnerSaveDatList;
+
     public GameSaveData()
     {
         playerSaveData = new PlayerSaveData();
     }
+}
+
+[Serializable]
+public class SpawnerSaveDataList
+{
+    public List<SpawnerSaveData> spawnerData = new List<SpawnerSaveData>();
 }

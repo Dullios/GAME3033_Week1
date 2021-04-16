@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-[RequireComponent(typeof(ZombieStateMachine))]
+[RequireComponent(typeof(ZombieStateMachine), typeof(ZombieHealth))]
 
 public class ZombieComponent : MonoBehaviour
 {

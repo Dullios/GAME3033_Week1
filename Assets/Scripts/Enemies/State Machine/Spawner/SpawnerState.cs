@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SpawnerState : State<SpawnerStateEnum>
 {
-    private ZombieSpawner spawner;
+    protected ZombieSpawner spawner;
     protected SpawnerState(ZombieSpawner _spawner, SpawnerStateMachine stateMachine) : base(stateMachine)
     {
         spawner = _spawner;
@@ -21,6 +21,11 @@ public class SpawnerState : State<SpawnerStateEnum>
         GameObject zombie = Object.Instantiate(zombieToSpawn, spawnVolume.GetPositionInBounds(), spawner.transform.rotation);
 
         zombie.GetComponent<ZombieComponent>().Initialize(spawner.FollowObject);
+        zombie.GetComponent<HealthComponent>().OnDeath += OnZombieDeath;
+    }
+
+    protected virtual void OnZombieDeath()
+    {
 
     }
 }
